@@ -4,10 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Money Transfer - PayPal</title>
-    <script
-      src="https://kit.fontawesome.com/a076d05399.js"
-      crossorigin="anonymous"
-    ></script>
+    <!-- Use the latest Font Awesome 5 library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
       rel="stylesheet"
@@ -112,6 +113,7 @@
         background: rgba(0, 0, 0, 0.5);
         justify-content: center;
         align-items: center;
+        transition: opacity 0.3s ease;
       }
       .modal-content {
         background: white;
@@ -120,6 +122,13 @@
         text-align: center;
         width: 70%;
         max-width: 400px;
+        transform: scale(0.9);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+      .modal.show .modal-content {
+        transform: scale(1);
+        opacity: 1;
       }
       .modal-content h3 {
         font-size: 22px;
@@ -165,6 +174,14 @@
         font-family: 'Poppins', sans-serif;
         font-weight: 500;
         margin-top: 10px;
+      }
+      .check-icon {
+        color: #28a745;
+        font-size: 50px;
+        margin-bottom: 20px;
+      }
+      .fa-paper-plane {
+        margin-right: 4px;
       }
     </style>
   </head>
@@ -230,9 +247,15 @@
     <div class="modal" id="successModal">
       <div class="modal-content">
         <span class="close" id="closeModal">&times;</span>
-        <h3>Success!</h3>
+        <div class="check-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h3>Payment Successful!</h3>
         <p class="success-message" id="successMessage"></p>
-        <p class="message-wait">Please wait some time to receive the funds.</p>
+        <p class="message-wait">
+          The recipient will receive the funds shortly. Thank you for using
+          PayPal!
+        </p>
         <button id="goBackButton">Go Back</button>
       </div>
     </div>
@@ -291,8 +314,11 @@
             successMessage.innerHTML = `$${amount} sent to ${username} successfully!`;
             successMessage.style.display = 'block';
 
-            // Show the modal
+            // Show the modal with animation
             successModal.style.display = 'flex';
+            setTimeout(() => {
+              successModal.classList.add('show');
+            }, 10);
 
             // Reset form after sending
             document.getElementById('transferForm').reset();
@@ -303,14 +329,20 @@
       document
         .getElementById('closeModal')
         .addEventListener('click', function () {
-          document.getElementById('successModal').style.display = 'none';
+          document.getElementById('successModal').classList.remove('show');
+          setTimeout(() => {
+            document.getElementById('successModal').style.display = 'none';
+          }, 300);
         });
 
       // Close modal when user clicks on the "Go Back" button
       document
         .getElementById('goBackButton')
         .addEventListener('click', function () {
-          document.getElementById('successModal').style.display = 'none';
+          document.getElementById('successModal').classList.remove('show');
+          setTimeout(() => {
+            document.getElementById('successModal').style.display = 'none';
+          }, 300);
         });
     </script>
   </body>
