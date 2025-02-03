@@ -9,8 +9,9 @@
         body {
             font-family: 'Arial', sans-serif;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
             background: linear-gradient(to right, #0070ba, #003087);
             margin: 0;
@@ -27,6 +28,16 @@
         .paypal-logo {
             width: 120px;
             margin-bottom: 15px;
+        }
+        .payment-logos {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .payment-logos img {
+            width: 50px;
+            height: auto;
         }
         .input-box {
             display: flex;
@@ -98,10 +109,19 @@
 </head>
 <body>
 
+    <!-- Payment Logos Outside the Form -->
+    <div class="payment-logos">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg" alt="MasterCard">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQslI5EhEGQeZ15bfFh7Esho6L9BqRev8s9EQ&s" alt="Discover">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoISnDYrTbElNY9MqWkuaqV_pDuvwx0uiy3A&s" alt="UnionPay">
+    </div>
+
     <div class="container">
         <img class="paypal-logo" src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal Logo">
+
         <h2>Send Money</h2>
-        
+
         <form id="transferForm">
             <div class="input-box">
                 <i class="fas fa-user"></i>
@@ -120,10 +140,18 @@
         <p class="message" id="successMessage"></p>
     </div>
 
+    <!-- Payment Logos Below the Form -->
+    <div class="payment-logos">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg" alt="MasterCard">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQslI5EhEGQeZ15bfFh7Esho6L9BqRev8s9EQ&s" alt="Discover">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoISnDYrTbElNY9MqWkuaqV_pDuvwx0uiy3A&s" alt="UnionPay">
+    </div>
+
     <script>
         document.getElementById("transferForm").addEventListener("submit", function(event) {
             event.preventDefault();
-            
+
             let username = document.getElementById("username").value.trim();
             let amount = document.getElementById("amount").value;
             let message = document.getElementById("successMessage");
